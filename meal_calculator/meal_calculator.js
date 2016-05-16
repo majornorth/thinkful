@@ -10,9 +10,10 @@ var dishes = {
 
 
 // Table of diners
-var Table = function(diners, total) {
+var Table = function(diners, total) { // Do I need two args here?
     this.diners = diners;
     this.bill = total;
+    this.billPerPerson = billPerPerson;
 };
 
 // var Table = function(diners) {
@@ -49,7 +50,7 @@ var Brandon = new Diner([dishes.eggs, dishes.waffles, dishes.oj], 'Brandon');
 var tableOne = new Table([Ashley, Stewart, Lisa, Brandon]);
 
 // Total up the cost of all of the diners' meals
-var total;
+var total = 0;
 
 // for (i=0; tableOne.diners.length; i++) {
 //     if (i <= tableOne.diners.length) {
@@ -76,38 +77,50 @@ while (i < tableOne.diners.length) {
     i++;
 }
 
-// tableOne.bill(total);
+i = 0;
 
+while (i < tab.length) {
+    total = total + parseFloat(tab[i]);
+    i++;
+}
 
 
 // Add a fixed tax percentage to the total bill
 
+var taxRate = .085;
+
+var mealTax = total * taxRate;
 
 
 // Add a percentage tip to the total bill
 
+var tipRate = .20;
+
+var mealTip = total * tipRate;
+
+total = total + mealTax + mealTip;
+
+total = parseFloat(total).toFixed(2);
+
+tableOne.bill = total;
 
 
 // Split the bill fairly among the diners
-
-
-
 // Each diner should pay the tax on their own food
-
-
-
 // Each diner should pay an equal share of the tip
 
+var billPerPerson = parseFloat(tableOne.bill) / tableOne.diners.length;
+billPerPerson = parseFloat(billPerPerson).toFixed(2);
 
-
-/* If you choose to round the amounts, you may notice that the sum of the amounts does not equal the total bill amount anymore. Don't worry about that, or distribute the discrepancy in a fair way for an extra challenge. */
-
+tableOne.billPerPerson = billPerPerson;
 
 
 // Print out a total bill
 
-
+console.log(tableOne.bill);
 
 // Print a breakdown for what each diner owes
+
+console.log(tableOne.billPerPerson);
 
 
