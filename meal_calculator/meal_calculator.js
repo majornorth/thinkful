@@ -10,25 +10,11 @@ var dishes = {
 
 
 // Table of diners
-var Table = function(diners, total) { // Do I need two args here?
+var Table = function(diners, total, billPerPerson) { // Do I need two args here?
     this.diners = diners;
     this.bill = total;
     this.billPerPerson = billPerPerson;
 };
-
-// var Table = function(diners) {
-//     var theTable = {};
-
-//     function(diners) {
-//         for (var i=0; i<diners.length; i++) {
-//             var dinerName = diners[i].dinerName;
-//             theTable.
-//         }
-//     }
-
-//     this.diners = theTable;
-// };
-
 
 // Create diner objects which represent a single diner.
 var Diner = function(dishes, dinerName) {
@@ -62,28 +48,44 @@ var total = 0;
 //     }
 // };
 
-i = 0;
+// i = 0;
+
+// while (i < tableOne.diners.length) {
+//     var totalDishes = tableOne.diners[i].diner.dishes.length;
+//     d = 0;
+
+//     while (d < totalDishes) {
+//         var item = tableOne.diners[i].diner.dishes[d];
+//         for (var prop in item) { tab.push(item[prop]); };
+//         d++;
+//     }
+//     i++;
+// }
+
+// i = 0;
+
+// while (i < tab.length) {
+//     total = total + parseFloat(tab[i]);
+//     i++;
+// }
+
 var tab = [];
 
-while (i < tableOne.diners.length) {
-    var totalDishes = tableOne.diners[i].diner.dishes.length;
-    d = 0;
 
-    while (d < totalDishes) {
-        var item = tableOne.diners[i].diner.dishes[d];
-        for (var prop in item) { tab.push(item[prop]); };
-        d++;
-    }
-    i++;
-}
+// By using forEach instead of while, I'm saving 17 lines of code
+tableOne.diners.forEach(function(diner) {
+    var allDishes = diner.diner.dishes;
 
-i = 0;
+    allDishes.forEach(function(dish) {
+        for (var prop in dish) {
+            tab.push(dish[prop]);
+        };
+    });
+});
 
-while (i < tab.length) {
-    total = total + parseFloat(tab[i]);
-    i++;
-}
-
+tab.forEach(function(cost) {
+    total = total + parseFloat(cost);
+});
 
 // Add a fixed tax percentage to the total bill
 
